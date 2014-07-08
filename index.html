@@ -11,7 +11,8 @@
       .show{display: block}
       .hide{display: none}
       .ui-btn{padding:15px;}
-      #headerBar .ui-btn-active{background:#D6634D;border-color:#912510}
+      #headerBar .ui-btn-active{background:#CFBEA0;border-color:#CFBEA0;}
+      #headerBar .head-btn{height:10px;line-height:10px;}
     </style>
  </head>
  <body>
@@ -39,8 +40,8 @@
       </div>
   </div>
 
-
-    <ul class="page-ul show index" data-role="listview">
+    <div class="show index">
+    <ul class="page-ul" data-role="listview">
       <li><a href="#">
         <img src="face/1.jpg">
       <h2>Broken Bells</h2>
@@ -51,59 +52,24 @@
       <h2>Warning</h2>
       <p>Hot Chip</p></a>
        </li>
-      <li><a href="#">
-        <img src="face/3.jpg">
-      <h2>Wolfgang Amadeus Phoenix</h2>
-      <p>Phoenix</p></a>
-      </li>
-      <li><a href="#">
-        <img src="face/4.jpg">
-      <h2>Wolfgang Amadeus Phoenix</h2>
-      <p>Phoenix</p></a>
-      </li>
-     <li><a href="#">
-        <img src="face/1.jpg">
-      <h2>Broken Bells</h2>
-      <p>Broken Bells</p></a>
-      </li>
-      <li><a href="#">
-       <img src="face/2.jpg">
-      <h2>Warning</h2>
-      <p>Hot Chip</p></a>
-       </li>
-      <li><a href="#">
-        <img src="face/3.jpg">
-      <h2>Wolfgang Amadeus Phoenix</h2>
-      <p>Phoenix</p></a>
-      </li>
-      <li><a href="#">
-        <img src="face/4.jpg">
-      <h2>Wolfgang Amadeus Phoenix</h2>
-      <p>Phoenix</p></a>
-      </li>
-       <li><a href="#">
-        <img src="face/1.jpg">
-      <h2>Broken Bells</h2>
-      <p>Broken Bells</p></a>
-      </li>
-      <li><a href="#">
-       <img src="face/2.jpg">
-      <h2>Warning</h2>
-      <p>Hot Chip</p></a>
-       </li>
-      <li><a href="#">
-        <img src="face/3.jpg">
-      <h2>Wolfgang Amadeus Phoenix</h2>
-      <p>Phoenix</p></a>
-      </li>
-      <li><a href="#">
-        <img src="face/4.jpg">
-      <h2>Wolfgang Amadeus Phoenix</h2>
-      <p>Phoenix</p></a>
-      </li>
     </ul>
-    <div class="hide page-ul place" style="height:200px;">请连接网络</div>
-    <div class="hide page-ul race">
+    </div>
+    <div class="hide page-ul place">
+      <ul class="page-ul" data-role="listview">
+      <li><a href="#">
+        <img src="face/1.jpg">
+      <h2>回龙观市场</h2>
+      <p>北京市回龙观市场内</p></a>
+      </li>
+      <li><a href="#">
+       <img src="face/2.jpg">
+      <h2>红星乒乓球馆</h2>
+      <p>红星乒乓球馆的球场</p></a>
+       </li>
+    </ul>
+
+    </div>
+    <div class="hide page-ul race" style="padding:10px;">
       <form action="">
         <label for="textinput-6">标题:</label>
         <input type="text" name="textinput-6" id="textinput-6" placeholder="" value="">
@@ -111,15 +77,6 @@
         <input type="date" name="date" id="date" value="">
         <label for="text-basic">地点:</label>
         <input type="text" name="text-basic" id="text-basic" value="">
-        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-               <legend>性别要求:</legend>
-                  <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked">
-                  <label for="radio-choice-c">男</label>
-                  <input type="radio" name="radio-choice-b" id="radio-choice-d" value="grid">
-                  <label for="radio-choice-d">女</label>
-                  <input type="radio" name="radio-choice-b" id="radio-choice-e" value="gallery">
-                  <label for="radio-choice-e">均可</label>
-          </fieldset>
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                <legend>性别要求:</legend>
                   <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked">
@@ -129,7 +86,6 @@
                   <input type="radio" name="radio-choice-b" id="radio-choice-e" value="gallery">
                   <label for="radio-choice-e">均可</label>
           </fieldset>
-    
            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                <legend>付款方式:</legend>
                   <input type="radio" name="radio-choice-c" id="radio-choice-c-1" value="list" checked="checked">
@@ -141,6 +97,8 @@
                   <input type="radio" name="radio-choice-c" id="radio-choice-f-1" value="gallery">
                   <label for="radio-choice-f-1">免费</label>
           </fieldset>
+
+          <a class="ui-shadow ui-btn ui-corner-all" javascript=":;">提交</a>
 
       </form>
 
