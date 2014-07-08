@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" charset="UTF-8">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.3.min.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.3.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=421818c1b0ebde9a5b5c4419582b6383"></script>
+    <style>
+      .show{display: block}
+      .hide{display: none}
+      .ui-btn{padding:15px;}
+      #headerBar .ui-btn-active{background:#D6634D;border-color:#912510}
+    </style>
+ </head>
+ <body>
+
+<div data-role="page">
+  <div data-role="header" id="headerBar" style="" data-position="fixed">
+    <h1 class="ui-title" role="heading" aria-level="1">一起乒乓</h1>
+     <div data-role="navbar" data-position="fixed" class="index show">
+        <ul>
+          <li><a href="#" class="head-btn ui-btn-active ui-state-persist">附近球友</a></li>
+          <li><a href="#" class="head-btn">地图模式</a></li>
+        </ul>
+      </div>
+       <div data-role="navbar" data-position="fixed" class="place hide">
+        <ul>
+          <li><a href="#" class="head-btn ui-btn-active ui-state-persist">附近场地</a></li>
+          <li><a href="#" class="head-btn">地图模式</a></li>
+        </ul>
+      </div>
+       <div data-role="navbar" data-position="fixed" class="race hide">
+        <ul>
+          <li><a href="#" class="head-btn ui-btn-active ui-state-persist">填写表单</a></li>
+          <li><a href="#" class="head-btn">日程表</a></li>
+        </ul>
+      </div>
+  </div>
+
+
+    <ul class="page-ul show index" data-role="listview">
+      <li><a href="#">
+        <img src="face/1.jpg">
+      <h2>Broken Bells</h2>
+      <p>Broken Bells</p></a>
+      </li>
+      <li><a href="#">
+       <img src="face/2.jpg">
+      <h2>Warning</h2>
+      <p>Hot Chip</p></a>
+       </li>
+      <li><a href="#">
+        <img src="face/3.jpg">
+      <h2>Wolfgang Amadeus Phoenix</h2>
+      <p>Phoenix</p></a>
+      </li>
+      <li><a href="#">
+        <img src="face/4.jpg">
+      <h2>Wolfgang Amadeus Phoenix</h2>
+      <p>Phoenix</p></a>
+      </li>
+     <li><a href="#">
+        <img src="face/1.jpg">
+      <h2>Broken Bells</h2>
+      <p>Broken Bells</p></a>
+      </li>
+      <li><a href="#">
+       <img src="face/2.jpg">
+      <h2>Warning</h2>
+      <p>Hot Chip</p></a>
+       </li>
+      <li><a href="#">
+        <img src="face/3.jpg">
+      <h2>Wolfgang Amadeus Phoenix</h2>
+      <p>Phoenix</p></a>
+      </li>
+      <li><a href="#">
+        <img src="face/4.jpg">
+      <h2>Wolfgang Amadeus Phoenix</h2>
+      <p>Phoenix</p></a>
+      </li>
+       <li><a href="#">
+        <img src="face/1.jpg">
+      <h2>Broken Bells</h2>
+      <p>Broken Bells</p></a>
+      </li>
+      <li><a href="#">
+       <img src="face/2.jpg">
+      <h2>Warning</h2>
+      <p>Hot Chip</p></a>
+       </li>
+      <li><a href="#">
+        <img src="face/3.jpg">
+      <h2>Wolfgang Amadeus Phoenix</h2>
+      <p>Phoenix</p></a>
+      </li>
+      <li><a href="#">
+        <img src="face/4.jpg">
+      <h2>Wolfgang Amadeus Phoenix</h2>
+      <p>Phoenix</p></a>
+      </li>
+    </ul>
+    <div class="hide page-ul place" style="height:200px;">请连接网络</div>
+    <div class="hide page-ul race">
+      <form action="">
+        <label for="textinput-6">标题:</label>
+        <input type="text" name="textinput-6" id="textinput-6" placeholder="" value="">
+        <label for="date">时间:</label>
+        <input type="date" name="date" id="date" value="">
+        <label for="text-basic">地点:</label>
+        <input type="text" name="text-basic" id="text-basic" value="">
+        <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+               <legend>性别要求:</legend>
+                  <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked">
+                  <label for="radio-choice-c">男</label>
+                  <input type="radio" name="radio-choice-b" id="radio-choice-d" value="grid">
+                  <label for="radio-choice-d">女</label>
+                  <input type="radio" name="radio-choice-b" id="radio-choice-e" value="gallery">
+                  <label for="radio-choice-e">均可</label>
+          </fieldset>
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+               <legend>性别要求:</legend>
+                  <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked">
+                  <label for="radio-choice-c">男</label>
+                  <input type="radio" name="radio-choice-b" id="radio-choice-d" value="grid">
+                  <label for="radio-choice-d">女</label>
+                  <input type="radio" name="radio-choice-b" id="radio-choice-e" value="gallery">
+                  <label for="radio-choice-e">均可</label>
+          </fieldset>
+    
+           <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+               <legend>付款方式:</legend>
+                  <input type="radio" name="radio-choice-c" id="radio-choice-c-1" value="list" checked="checked">
+                  <label for="radio-choice-c-1">邀请人付</label>
+                  <input type="radio" name="radio-choice-c" id="radio-choice-d-1" value="grid">
+                  <label for="radio-choice-d-1">被邀请人付</label>
+                  <input type="radio" name="radio-choice-c" id="radio-choice-e-1" value="gallery">
+                  <label for="radio-choice-e-1">AA</label>
+                  <input type="radio" name="radio-choice-c" id="radio-choice-f-1" value="gallery">
+                  <label for="radio-choice-f-1">免费</label>
+          </fieldset>
+
+      </form>
+
+
+    </div>
+    <div data-role="footer" data-position="fixed">
+	    <div data-role="navbar">
+	      <ul>
+	        <li><a href="#" data-for="index" class="foot-btn ui-btn-active ui-state-persist">找球友</a></li>
+	        <li><a href="#" data-for="place" class="foot-btn">找场地</a></li>
+	        <li><a href="#" data-for="race" class="foot-btn">邀请打球</a></li>
+	      </ul>
+	    </div>
+  </div>
+  </div>
+  <script>
+     var height = $('body').css('height');
+      $('#meet').css('height',height);
+      var mapinit = false;
+      var la,lo;
+     $('#meet-map').on('click',function(e){
+        if(!mapinit){
+            var map = new BMap.Map("meet");
+            var point = new BMap.Point(116.34785, 40.074234);
+            map.centerAndZoom(point, 15);
+            mapinit = true;
+        }
+    })
+    $('.foot-btn').on('click',function(e){
+      var pageId = $(this).attr('data-for');
+       $('.show').hide()
+        $('.show').removeClass('hide');
+        console.log( $('.'+pageId))
+       $('.'+pageId).show();
+       $('.'+pageId).addClass('show');
+
+    });
+
+	//document.addEventListener("deviceready", onDeviceReady, false);
+	//function onDeviceReady() {
+        navigator.geolocation.getCurrentPosition(function(pos){
+            la = pos.coords.latitude;
+            lo = pos.coords.longitude;
+        },function(e){}, {maximumAge: 3000, timeout: 5000})
+   // }
+  </script>
+
+ </body>
+</html>
