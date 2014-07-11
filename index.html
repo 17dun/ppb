@@ -41,17 +41,7 @@
   </div>
 
     <div class="show index">
-    <ul class="page-ul" data-role="listview">
-      <li><a href="#">
-        <img src="face/1.jpg">
-      <h2>Broken Bells</h2>
-      <p>Broken Bells</p></a>
-      </li>
-      <li><a href="#">
-       <img src="face/2.jpg">
-      <h2>Warning</h2>
-      <p>Hot Chip</p></a>
-       </li>
+    <ul class="page-ul" id="userListBox" data-role="listview">
     </ul>
     </div>
     <div class="hide page-ul place">
@@ -144,6 +134,27 @@
             lo = pos.coords.longitude;
         },function(e){}, {maximumAge: 3000, timeout: 5000})
    // }
+
+   //加载用户列表
+   function loadUserList(data){
+        console.log(22222222222222);
+        var $userListBox = $('#userListBox');
+        var html = [];
+        $.each(data,function(item,i){
+            html.push('<li><a href="#">');
+            html.push('<img src="face/1.jpg">');
+            html.push('<h2>回龙观市场</h2>');
+            html.push('<p>北京市回龙观市场内</p></a>');
+            html.push('</li>');
+        });
+        $userListBox.html(html.join(''));
+        $userListBox.listview('refresh');
+   }
+   $.getScript('http://192.168.1.100:888/?method=getUserList');
+
+
+
+
   </script>
 
  </body>
