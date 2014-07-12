@@ -140,11 +140,11 @@
         console.log(22222222222222);
         var $userListBox = $('#userListBox');
         var html = [];
-        $.each(data,function(item,i){
+        $.each(data,function(i,item){
             html.push('<li><a href="#">');
-            html.push('<img src="face/1.jpg">');
-            html.push('<h2>回龙观市场</h2>');
-            html.push('<p>北京市回龙观市场内</p></a>');
+            html.push('<img src="'+item.pic+'">');
+            html.push('<h2>'+item.name+'</h2>');
+            html.push('<p>'+item.paizi+'</p></a>');
             html.push('</li>');
         });
         $userListBox.html(html.join(''));
