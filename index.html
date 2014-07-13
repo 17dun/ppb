@@ -60,39 +60,36 @@
 
     </div>
     <div class="hide page-ul race" style="padding:10px;">
-      <form action="">
-        <label for="textinput-6">标题:</label>
-        <input type="text" name="textinput-6" id="textinput-6" placeholder="" value="">
+      <form action="" id="meetForm">
+        <label for="title">标题:</label>
+        <input type="text" name="title" id="title" placeholder="" value="">
         <label for="date">时间:</label>
         <input type="date" name="date" id="date" value="">
-        <label for="text-basic">地点:</label>
-        <input type="text" name="text-basic" id="text-basic" value="">
+        <input type="time" name="time" id="time" value="">
+        <label for="addressId">地点:</label>
+        <input type="text" name="addressId" id="addressId" value="">
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                <legend>性别要求:</legend>
-                  <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked">
-                  <label for="radio-choice-c">男</label>
-                  <input type="radio" name="radio-choice-b" id="radio-choice-d" value="grid">
-                  <label for="radio-choice-d">女</label>
-                  <input type="radio" name="radio-choice-b" id="radio-choice-e" value="gallery">
-                  <label for="radio-choice-e">均可</label>
+                  <input type="radio" name="sex" id="sex-boy" value="1" checked="checked">
+                  <label for="sex-boy">男</label>
+                  <input type="radio" name="sex" id="sex-girl" value="2">
+                  <label for="sex-girl">女</label>
+                  <input type="radio" name="sex" id="sex-both" value="0">
+                  <label for="sex-both">均可</label>
           </fieldset>
            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                <legend>付款方式:</legend>
-                  <input type="radio" name="radio-choice-c" id="radio-choice-c-1" value="list" checked="checked">
-                  <label for="radio-choice-c-1">邀请人付</label>
-                  <input type="radio" name="radio-choice-c" id="radio-choice-d-1" value="grid">
-                  <label for="radio-choice-d-1">被邀请人付</label>
-                  <input type="radio" name="radio-choice-c" id="radio-choice-e-1" value="gallery">
-                  <label for="radio-choice-e-1">AA</label>
-                  <input type="radio" name="radio-choice-c" id="radio-choice-f-1" value="gallery">
-                  <label for="radio-choice-f-1">免费</label>
+                  <input type="radio" name="pay" id="pay-1" value="1" checked="checked">
+                  <label for="pay-1">邀请人付</label>
+                  <input type="radio" name="pay" id="pay-2" value="2">
+                  <label for="pay-2">被邀请人付</label>
+                  <input type="radio" name="pay" id="pay-3" value="3">
+                  <label for="pay-3">AA</label>
+                  <input type="radio" name="pay" id="pay-4" value="4">
+                  <label for="pay-4">免费</label>
           </fieldset>
-
-          <a class="ui-shadow ui-btn ui-corner-all" javascript=":;">提交</a>
-
+          <a id="meetSubmit" class="ui-shadow ui-btn ui-corner-all" javascript=":;">提交</a>
       </form>
-
-
     </div>
     <div data-role="footer" data-position="fixed">
 	    <div data-role="navbar">
@@ -118,7 +115,7 @@
         }
     })
     $('.foot-btn').on('click',function(e){
-      var pageId = $(this).attr('data-for');
+      var pageId = $(this).data('for');
        $('.show').hide()
         $('.show').removeClass('hide');
         console.log( $('.'+pageId))
@@ -126,7 +123,25 @@
        $('.'+pageId).addClass('show');
 
     });
-
+  
+  $('#meetSubmit').on('click',function(){
+    $.ajax({
+      type:'GET',
+      url:'http://127.0.0.1:888/?method=setMeet',
+      data:$('#meetForm').serialize(),
+      dataType: "jsonp",  
+      cache: false,  
+      jsonpCallback: 'callback',
+      success:function(data){
+        if(data){
+          console.log(data.message);
+        }else{
+          console.log("error");
+        }
+      }
+    })
+  });
+  
 	//document.addEventListener("deviceready", onDeviceReady, false);
 	//function onDeviceReady() {
         navigator.geolocation.getCurrentPosition(function(pos){
@@ -150,7 +165,7 @@
         $userListBox.html(html.join(''));
         $userListBox.listview('refresh');
    }
-   $.getScript('http://192.168.1.100:888/?method=getUserList');
+   $.getScript('http://127.0.0.1:888/?method=getUserList');
 
 
 
