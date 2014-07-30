@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 
 
 function getUserList(req,res){
-	connection.query('SELECT * from user limit 0,10', function(err, rows) {
+	connection.query('SELECT * from user limit 0,100', function(err, rows) {
 	 res.write('loadUserList('+JSON.stringify(rows)+')');
 	 res.end();
 	});
@@ -38,23 +38,23 @@ function setMeet(req,res) {
 	  res.end('callback({code:'+code+',message:"'+message+'"})');
 	});
 }
-function importUserName(req,res){
-    var data=fs.readFileSync('test.txt','utf-8');
-    var names = data.split('*');
-    var item = 0;
-    for(var i=0,len=names.length;i<len;i++){
-        var sql ='UPDATE `user` SET `name`="'+names[item]+'" WHERE `id`in (select u.id from (SELECT * FROM `user` WHERE name=\'\' limit 1) as u)';
-        connection.query(sql, function(err, rows) {
-            if(rows.changedRows==0){
-                connection.query('INSERT INTO `user`(`name`) VALUES ("'+names[item]+'")', function(err, rows) {
 
+function importUserName(req,res){
+    var data =  require('./data.json');
+    data.forEach(function(item,index){
+      var sex = Math.round(Math.random());
+      var picSrc = item.img.split('/')[3]+'-180-'+item.img.split('/').slice(5,8).join('-');
+       var sql ='UPDATE `user` SET `name`="'+item.name+'", `pic`="'+picSrc+'",`info`="'+item.info+'",`sex`="'+sex+'" WHERE `id`in (select u.id from (SELECT * FROM `user` WHERE name=\'\' limit 1) as u)';
+       connection.query(sql, function(err, rows) {
+            if(rows.changedRows==0){
+                connection.query('INSERT INTO `user`(`name`,`pic`,`info`,`sex`) VALUES ("'+item.name+'","'+picSrc+'","'+item.info+'","'+sex+'")', function(err, rows) {
                 });
             }
-            item++;
-            res.end();
         });
-    }  
+    })
 }
+
+
 function downLoadImg(){
     fs.readFile('test.txt','utf-8',function(err,data){
     data = eval("("+data.substring(1,data.length)+")");
