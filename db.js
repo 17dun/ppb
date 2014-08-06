@@ -30,9 +30,7 @@ function getPlaceList(req,res){
 }
 function setMeet(req,res) {
   	var querys = querystring.parse(url.parse(req.url).query);
-  	
   	var sql ='INSERT INTO `ppq`.`meet` (`ownerId`, `title`, `datetime`, `addressId`, `sex`, `pay`) VALUES (1,"'+querys.title+'","'+querys.date+' '+querys.time+'","'+querys.addressId+'","'+querys.sex+'","'+querys.pay+'")';
-  	
 	connection.query(sql, function(err, rows) {
 		var code=1,message="Ok";
 		if(!err){
@@ -58,13 +56,29 @@ function importUserName(req,res){
     })
 }
 
+function setUserData(req,res){
+  var sql = 'SELECT `id` FROM `user` WHERE `style`=""';
+  connection.query(sql, function(err, rows) {
+    rows.forEach(function(item,index){
+      var num  = item.id%4;
+      var sql2 = 'UPDATE `user` SET `style`="'+num+'" WHERE id ='+item.id;
+      connection.query(sql2,function(err,rows){
+          if(!err){
+            console.log(item.id+' is ok');
+          }
+      })
+    })
+  })
+}
+
+
+
 
 function downLoadImg(){
     fs.readFile('test.txt','utf-8',function(err,data){
     data = eval("("+data.substring(1,data.length)+")");
         data.forEach(function(obj){
             request(obj.img).pipe(fs.createWriteStream('abc.jpg'));
-           
         });
     });
 }
@@ -73,5 +87,6 @@ module.exports = {
 	getPlaceList : getPlaceList,
 	setMeet:setMeet,
     importUserName:importUserName,
-    downLoadImg:downLoadImg
+    downLoadImg:downLoadImg,
+    setUserData:setUserData
 };
