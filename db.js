@@ -5,7 +5,7 @@
 var mysql = require('mysql');
 var http = require('http');
 var url = require('url');
-var fs=require('fs');  
+var fs=require('fs');
 var request = require('request');
 var querystring = require('querystring');
 var connection = mysql.createConnection({
@@ -17,15 +17,51 @@ var connection = mysql.createConnection({
 
 
 function getUserList(req,res){
-	connection.query('SELECT * from user limit 0,100', function(err, rows) {
-	 res.write(JSON.stringify(rows));
-	 res.end();
+	connection.query('SELECT * from user order by `id` desc limit 0,30', function(err, rows) {
+	  res.end(JSON.stringify(rows));
 	});
 }
+
+function getUserInfo(req,res){
+	var querys = querystring.parse(url.parse(req.url).query);
+	var id = querys.id;
+	connection.query('SELECT * from user WHERE `id`='+id, function(err, rows) {
+	  res.end(JSON.stringify(rows));
+	});
+}
+
+function forPonit(pos,dis){
+	var x = pos.x;
+	var y = pos.y;
+	var dm = (dis/2)*Math.sqrt(2);
+	return {
+		'lt': {
+			x : x+dm,
+			y : y-dy
+		},
+		'rt':{
+			x : x+dm,
+			y : y+dy
+		},
+		'lb':{
+			x : x-dm,
+			y : y-dy
+		},
+		'rb':{
+			x : x-dm,
+			y : y+dy
+		}
+	}
+}
+
 function getPlaceList(req,res){
-	connection.query('SELECT * from place limit 0,10', function(err, rows) {
-	 res.write('loadPlaceList('+JSON.stringify(rows)+')');
-	  res.end();
+	var querys = querystring.parse(url.parse(req.url).query);
+	// var pos = {x:querys.x,y:querys.y};
+	// var dis = querys.dis;
+	// var rtArr = forPonit(pos,dis);
+
+	connection.query('SELECT * from addr WHERE 1=1 limit 20', function(err, rows) {
+	  res.end(JSON.stringify(rows));
 	});
 }
 function setMeet(req,res) {
@@ -85,6 +121,7 @@ function downLoadImg(){
 module.exports = {
 	getUserList : getUserList,
 	getPlaceList : getPlaceList,
+	getUserInfo : getUserInfo,
 	setMeet:setMeet,
     importUserName:importUserName,
     downLoadImg:downLoadImg,
