@@ -75,7 +75,7 @@ function getPlaceList(req,res){
 }
 function setMeet(req,res) {
   	var querys = querystring.parse(url.parse(req.url).query);
-  	var sql ='INSERT INTO `ppq`.`meet` (`ownerId`, `title`, `datetime`, `addressId`, `sex`, `pay`) VALUES (1,"'+querys.title+'","'+querys.date+' '+querys.time+'","'+querys.addressId+'","'+querys.sex+'","'+querys.pay+'")';
+  	var sql ='INSERT INTO `ppq`.`meet` (`ownerId`, `title`, `datetime`, `addressId`, `sex`, `pay`) VALUES (1,"' +querys.title+'","'+querys.date+' '+querys.time+'","'+querys.addressId+'","'+querys.sex+'","'+querys.pay+'")';
 	connection.query(sql, function(err, rows) {
 		var code=1,message="Ok";
 		if(!err){
@@ -84,6 +84,18 @@ function setMeet(req,res) {
 		}
 	  res.end('callback({code:'+code+',message:"'+message+'"})');
 	});
+}
+function setAddrComment(req,res) {
+    var querys = querystring.parse(url.parse(req.url).query);
+    var sql ='INSERT INTO `ppq`.`addr_comment` (`user_id`, `addr_id`, `comment`, `time`, `start`) VALUES (1,"'+querys.addr_id+'","'+querys.comment +' '+querys.time +'","'+querys.start+'")';
+    connection.query(sql, function(err, rows) {
+        var code=1,message="Ok";
+        if(!err){
+            code=0;
+            message="Error";
+        }
+      res.end('callback({code:'+code+',message:"'+message+'"})');
+    });
 }
 
 function importUserName(req,res){
@@ -133,6 +145,7 @@ module.exports = {
 	getUserInfo : getUserInfo,
 	getPlaceInfo : getPlaceInfo,
 	setMeet:setMeet,
+    setAddrComment:setAddrComment,
     importUserName:importUserName,
     downLoadImg:downLoadImg,
     setUserData:setUserData
