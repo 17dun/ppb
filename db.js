@@ -30,6 +30,15 @@ function getUserInfo(req,res){
 	});
 }
 
+function getPlaceInfo(req,res){
+	var querys = querystring.parse(url.parse(req.url).query);
+	var id = querys.id;
+	connection.query('SELECT * from addr WHERE `id`='+id, function(err, rows) {
+	  res.end(JSON.stringify(rows));
+	});
+}
+
+
 function forPonit(pos,dis){
 	var x = pos.x;
 	var y = pos.y;
@@ -122,6 +131,7 @@ module.exports = {
 	getUserList : getUserList,
 	getPlaceList : getPlaceList,
 	getUserInfo : getUserInfo,
+	getPlaceInfo : getPlaceInfo,
 	setMeet:setMeet,
     importUserName:importUserName,
     downLoadImg:downLoadImg,
