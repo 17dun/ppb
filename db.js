@@ -65,9 +65,9 @@ function forPonit(pos,dis){
 
 function getPlaceList(req,res){
 	var querys = querystring.parse(url.parse(req.url).query);
-	// var pos = {x:querys.x,y:querys.y};
-	// var dis = querys.dis;
-	// var rtArr = forPonit(pos,dis);
+	var pos = {x:querys.x,y:querys.y};
+	var dis = querys.dis;
+	var rtArr = forPonit(pos,dis);
 
 	connection.query('SELECT * from addr WHERE 1=1 limit 20', function(err, rows) {
 	  res.end(JSON.stringify(rows));
@@ -94,7 +94,7 @@ function setAddrComment(req,res) {
             code=0;
             message="Error";
         }
-      res.end('callback({code:'+code+',message:"'+message+'"})');
+      res.end(JSON.stringify(rows));
     });
 }
 
@@ -127,8 +127,6 @@ function setUserData(req,res){
     })
   })
 }
-
-
 
 
 function downLoadImg(){
