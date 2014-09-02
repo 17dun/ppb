@@ -73,6 +73,19 @@ function getPlaceList(req,res){
 	  res.end(JSON.stringify(rows));
 	});
 }
+
+function getNewOneAddrCommentById(req,res){
+    var querys = querystring.parse(url.parse(req.url).query);
+    connection.query('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+querys.id+' order by time desc limit 0,1', function(err, rows) {
+      res.end(JSON.stringify(rows));
+    });
+}
+function getAddrCommentsById(req,res){
+    var querys = querystring.parse(url.parse(req.url).query);
+    connection.query('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+querys.id+' order by time desc limit 0,20', function(err, rows) {
+      res.end(JSON.stringify(rows));
+    });
+}
 function setMeet(req,res) {
   	var querys = querystring.parse(url.parse(req.url).query);
   	var sql ='INSERT INTO `ppq`.`meet` (`ownerId`, `title`, `datetime`, `addressId`, `sex`, `pay`) VALUES (1,"' +querys.title+'","'+querys.date+' '+querys.time+'","'+querys.addressId+'","'+querys.sex+'","'+querys.pay+'")';
@@ -146,5 +159,7 @@ module.exports = {
     setAddrComment:setAddrComment,
     importUserName:importUserName,
     downLoadImg:downLoadImg,
-    setUserData:setUserData
+    setUserData:setUserData,
+    getNewOneAddrCommentById:getNewOneAddrCommentById,
+    getAddrCommentsById:getAddrCommentsById
 };
