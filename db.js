@@ -76,6 +76,7 @@ function getPlaceList(req,res){
 
 function getNewOneAddrCommentById(req,res){
     var querys = querystring.parse(url.parse(req.url).query);
+    console.log('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+querys.id+' order by time desc limit 0,1');
     connection.query('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+querys.id+' order by time desc limit 0,1', function(err, rows) {
       res.end(JSON.stringify(rows));
     });
