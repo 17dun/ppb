@@ -46,19 +46,19 @@ function forPonit(pos,dis){
 	return {
 		'lt': {
 			x : x+dm,
-			y : y-dy
+			y : y-dm
 		},
 		'rt':{
 			x : x+dm,
-			y : y+dy
+			y : y+dm
 		},
 		'lb':{
 			x : x-dm,
-			y : y-dy
+			y : y-dm
 		},
 		'rb':{
 			x : x-dm,
-			y : y+dy
+			y : y+dm
 		}
 	}
 }
@@ -67,7 +67,7 @@ function getPlaceList(req,res){
 	var querys = querystring.parse(url.parse(req.url).query);
 	var pos = {x:querys.x,y:querys.y};
 	var dis = querys.dis;
-	var rtArr = forPonit(pos,dis);
+	//var rtArr = forPonit(pos,dis);
 
 	connection.query('SELECT * from addr WHERE 1=1 limit 20', function(err, rows) {
 	  res.end(JSON.stringify(rows));
