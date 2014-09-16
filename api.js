@@ -6,7 +6,7 @@ var http = require('http');
 var url = require('url');
 var db = require('./db');
 var querystring = require('querystring');
-var port = 888;
+var port = 8888;
 function main(req,res){
 	console.log(req.url);
 	var arg  = url.parse(req.url).query;

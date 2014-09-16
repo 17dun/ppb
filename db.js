@@ -44,34 +44,27 @@ function forPonit(pos,dis){
 	var y = pos.y;
 	var dm = (dis/2)*Math.sqrt(2);
 	return {
-		'lt': {
-			x : x+dm,
-			y : y-dm
-		},
-		'rt':{
-			x : x+dm,
-			y : y+dm
-		},
-		'lb':{
-			x : x-dm,
-			y : y-dm
-		},
-		'rb':{
-			x : x-dm,
-			y : y+dm
-		}
+		'x1': x-dm,
+		'x2': x+dm,
+		'y1': y-dm,
+		'y2': y+dm
 	}
 }
 
 function getPlaceList(req,res){
-	var querys = querystring.parse(url.parse(req.url).query);
-	var pos = {x:querys.x,y:querys.y};
-	var dis = querys.dis;
-	//var rtArr = forPonit(pos,dis);
-
 	connection.query('SELECT * from addr WHERE 1=1 limit 20', function(err, rows) {
 	  res.end(JSON.stringify(rows));
 	});
+}
+
+function getPlaceListByDis(req,res){
+  var querys = querystring.parse(url.parse(req.url).query);
+  var pos = {x:querys.x,y:querys.y};
+  var dis = querys.dis;
+  var rtArr = forPonit(pos,dis);
+  connection.query('SELECT * FROM `addr`where x between '+rtArr.x1+' and '+rtArr.x2+' and y between '+rtArr.y1+' and'+rtArr.y2, function(err, rows) {
+    res.end(JSON.stringify(rows));
+  });
 }
 
 function getNewOneAddrCommentById(req,res){
@@ -162,5 +155,6 @@ module.exports = {
     downLoadImg:downLoadImg,
     setUserData:setUserData,
     getNewOneAddrCommentById:getNewOneAddrCommentById,
-    getAddrCommentsById:getAddrCommentsById
+    getAddrCommentsById:getAddrCommentsById,
+    getPlaceListByDis:getPlaceListByDis
 };
