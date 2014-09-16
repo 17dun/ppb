@@ -44,10 +44,10 @@ function forPonit(pos,dis){
 	var y = pos.y;
 	var dm = (dis/2)*Math.sqrt(2);
 	return {
-		'x1': x-dm,
-		'x2': x+dm,
-		'y1': y-dm,
-		'y2': y+dm
+		'x1': Math.floor(x*1-dm),
+		'x2': Math.floor(x*1+dm),
+		'y1': Math.floor(y*1-dm),
+		'y2': Math.floor(y*1+dm)
 	}
 }
 
@@ -62,7 +62,7 @@ function getPlaceListByDis(req,res){
   var pos = {x:querys.x,y:querys.y};
   var dis = querys.dis;
   var rtArr = forPonit(pos,dis);
-  connection.query('SELECT * FROM `addr`where x between '+rtArr.x1+' and '+rtArr.x2+' and y between '+rtArr.y1+' and'+rtArr.y2, function(err, rows) {
+  connection.query('SELECT * FROM `addr`where x between '+rtArr.x1+' and '+rtArr.x2+' and y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
     res.end(JSON.stringify(rows));
   });
 }
