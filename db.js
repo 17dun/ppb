@@ -147,7 +147,7 @@ function setUserData(req,res){
 }
 
 function setXY(req,res){
-  var sql = 'SELECT `id` FROM `user` WHERE `x`=""';
+  var sql = 'SELECT `id` FROM `user`';
   var point = {
   	x:12950092,
   	y:4823386
@@ -156,8 +156,8 @@ function setXY(req,res){
     rows.forEach(function(item,index){
       var xF = Math.random()>0.5?-1:1;
       var yF = Math.random()>0.5?-1:1;
-      var xDis = Math.random()*12000*xF;
-      var yDis = Math.random()*16000*yF;
+      var xDis = Math.random()*20000*xF;
+      var yDis = Math.random()*20000*yF;
       var x = point.x + xDis;
       var y = point.y + yDis;
       var sql2 = 'UPDATE `user` SET `x`="'+x+'", `y`="'+y+'" WHERE id ='+item.id;
