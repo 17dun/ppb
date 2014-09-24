@@ -67,6 +67,17 @@ function getPlaceListByDis(req,res){
   });
 }
 
+function getUserListByDis(req,res){
+  var querys = querystring.parse(url.parse(req.url).query);
+  var pos = {x:querys.x,y:querys.y};
+  var dis = querys.dis;
+  var rtArr = forPonit(pos,dis);
+  connection.query('SELECT * FROM `user`where x between '+rtArr.x1+' and '+rtArr.x2+' and y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
+    res.end(JSON.stringify(rows));
+  });
+}
+
+
 function getNewOneAddrCommentById(req,res){
     var querys = querystring.parse(url.parse(req.url).query);
     console.log('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+querys.id+' order by time desc limit 0,1');
@@ -181,5 +192,6 @@ module.exports = {
     getNewOneAddrCommentById:getNewOneAddrCommentById,
     getAddrCommentsById:getAddrCommentsById,
     getPlaceListByDis:getPlaceListByDis,
-    setXY:setXY
+    setXY:setXY,
+    getUserListByDis:getUserListByDis
 };
