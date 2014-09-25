@@ -34,10 +34,19 @@ function getPlaceInfo(req,res){
 	var querys = querystring.parse(url.parse(req.url).query);
 	var id = querys.id;
 	connection.query('SELECT * from addr WHERE `id`='+id, function(err, rows) {
-	  res.end(JSON.stringify(rows));
+		var info = JSON.stringify(rows);
+		getNewOneAddrCommentById(id,function(commentData){
+			info.comment = commentData;
+			res.end(info);
+		})
 	});
 }
 
+function getNewOneAddrCommentById(id,callback){
+    connection.query('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+id+' order by time desc limit 0,1', function(err, rows) {
+      callback(JSON.stringify(rows));
+    });
+}
 
 function forPonit(pos,dis){
 	var x = pos.x;
@@ -77,14 +86,6 @@ function getUserListByDis(req,res){
   });
 }
 
-
-function getNewOneAddrCommentById(req,res){
-    var querys = querystring.parse(url.parse(req.url).query);
-    console.log('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+querys.id+' order by time desc limit 0,1');
-    connection.query('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+querys.id+' order by time desc limit 0,1', function(err, rows) {
-      res.end(JSON.stringify(rows));
-    });
-}
 function getAddrCommentsById(req,res){
     var querys = querystring.parse(url.parse(req.url).query);
     connection.query('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+querys.id+' order by time desc limit 0,20', function(err, rows) {
@@ -189,7 +190,6 @@ module.exports = {
     importUserName:importUserName,
     downLoadImg:downLoadImg,
     setUserData:setUserData,
-    getNewOneAddrCommentById:getNewOneAddrCommentById,
     getAddrCommentsById:getAddrCommentsById,
     getPlaceListByDis:getPlaceListByDis,
     setXY:setXY,
