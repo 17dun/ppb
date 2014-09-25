@@ -41,7 +41,7 @@ function getPlaceInfo(req,res){
 function getNewOneAddrCommentById(id,data,res){
     connection.query('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+id+' order by time desc limit 0,1', function(err, rows) {
       data[0].commentData = JSON.stringify(rows);
-      res.end(JSON.stringify(data[0]);
+      res.end(JSON.stringify(data[0]));
     });
 }
 
