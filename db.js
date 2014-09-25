@@ -35,16 +35,15 @@ function getPlaceInfo(req,res){
 	var id = querys.id;
 	connection.query('SELECT * from addr WHERE `id`='+id, function(err, rows) {
 		var info = JSON.stringify(rows);
-		getNewOneAddrCommentById(id,function(commentData){
-			info.comment = commentData;
-			res.end(info);
-		})
+		getNewOneAddrCommentById(id,info,res);
 	});
 }
 
-function getNewOneAddrCommentById(id,callback){
+function getNewOneAddrCommentById(id,data,res){
     connection.query('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+id+' order by time desc limit 0,1', function(err, rows) {
-      callback(JSON.stringify(rows));
+      data.comment = JSON.stringify(rows);
+      console.log(data);
+      res.end(data);
     });
 }
 
