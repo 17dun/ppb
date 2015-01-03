@@ -91,7 +91,7 @@ function getAddrCommentsById(req,res){
 }
 function setMeet(req,res) {
   	var querys = querystring.parse(url.parse(req.url).query);
-  	var sql ='INSERT INTO `ppq`.`meet` (`user_id`, `add_id`, `time`, `people_num`, `type_demand`, `sex_demand`, `age_demand`, `skills_demand`, `site_fee`) 
+  	var sql ='INSERT INTO `meet` (`user_id`, `add_id`, `time`, `people_num`, `type_demand`, `sex_demand`, `age_demand`, `skills_demand`, `site_fee`) 
     VALUES (2,"' +querys.add_id+'","'+querys.time+'","'+querys.people_num+'","'+querys.type_demand+'","'+querys.sex_demand+'","'+querys.age_demand+'","'+querys.skills_demand+'","'+querys.site_fee+'")';
 	connection.query(sql, function(err, rows) {
 		var code=1,message="Ok";
