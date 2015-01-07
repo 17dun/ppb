@@ -229,5 +229,6 @@ module.exports = {
     getAddrCommentsById:getAddrCommentsById,
     getPlaceListByDis:getPlaceListByDis,
     setXY:setXY,
-    getUserListByDis:getUserListByDis
+    getUserListByDis:getUserListByDis,
+    getMeetListByDis:getMeetListByDis
 };
