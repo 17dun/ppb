@@ -91,8 +91,10 @@ function getAddrCommentsById(req,res){
 }
 function setMeet(req,res) {
   	var querys = querystring.parse(url.parse(req.url).query);
-  	var sql ='INSERT INTO `meet` (`user_id`, `add_id`, `time`, `people_num`, `type_demand`, `sex_demand`, `age_demand`, `skills_demand`, `site_fee`) 
-    VALUES (2,"' +querys.add_id+'","'+querys.time+'","'+querys.people_num+'","'+querys.type_demand+'","'+querys.sex_demand+'","'+querys.age_demand+'","'+querys.skills_demand+'","'+querys.site_fee+'")';
+    var date = new Date();
+    var datetime = dateformat(date,'yyyy-MM-dd hh:mm:ss');
+  	var sql ='INSERT INTO `meet` (`user_id`, `add_id`, `time`, `people_num`, `type_demand`, `sex_demand`, `age_demand`, `skills_demand`, `site_fee`,`date_created`,`date_modified`) 
+    VALUES (2,"' +querys.add_id+'","'+querys.time+'","'+querys.people_num+'","'+querys.type_demand+'","'+querys.sex_demand+'","'+querys.age_demand+'","'+querys.skills_demand+'","'+querys.site_fee+'","'+datetime+'","'+datetime+'")';
 	connection.query(sql, function(err, rows) {
 		var code=1,message="Ok";
 		if(!err){
@@ -168,7 +170,36 @@ function setXY(req,res){
     })
   })
 }
-
+function dateformat(date, format) {
+  if(!date){
+    return '';
+  }
+    date = new Date(date-0);
+    var map = {
+        "M": date.getMonth() + 1, //月份 
+        "d": date.getDate(), //日 
+        "h": date.getHours(), //小时 
+        "m": date.getMinutes(), //分 
+        "s": date.getSeconds(), //秒 
+        "q": Math.floor((date.getMonth() + 3) / 3), //季度 
+        "S": date.getMilliseconds() //毫秒 
+    };
+    format = format.replace(/([yMdhmsqS])+/g, function(all, t){
+        var v = map[t];
+        if(v !== undefined){
+            if(all.length > 1){
+                v = '0' + v;
+                v = v.substr(v.length-2);
+            }
+            return v;
+        }
+        else if(t === 'y'){
+            return (date.getFullYear() + '').substr(4 - all.length);
+        }
+        return all;
+    });
+    return format;
+}
 
 function downLoadImg(){
     fs.readFile('test.txt','utf-8',function(err,data){
