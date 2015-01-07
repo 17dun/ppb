@@ -37,6 +37,13 @@ function getPlaceInfo(req,res){
 		getNewOneAddrCommentById(id,rows,res);
 	});
 }
+function getMeetInfo(req,res){
+  var querys = querystring.parse(url.parse(req.url).query);
+  var id = querys.id;
+  connection.query('SELECT * from meet WHERE `id`='+id, function(err, rows) {
+    getNewOneAddrCommentById(id,rows,res);
+  });
+}
 
 function getNewOneAddrCommentById(id,data,res){
     connection.query('SELECT u.name,a.comment,a.start,a.time FROM `addr_comment`as a inner join `user` as u on a.user_id=u.id WHERE addr_id='+id+' order by time desc limit 0,1', function(err, rows) {
@@ -77,7 +84,7 @@ function getMeetListByDis(req,res){
   var pos = {x:querys.x,y:querys.y};
   var dis = querys.dis;
   var rtArr = forPonit(pos,dis);
-  connection.query('SELECT m.* ,a.id,a.name FROM `meet` m inner join `addr` a on m.user_id = a.id where a.x between '+rtArr.x1+' and '+rtArr.x2+' and a.y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
+  connection.query('SELECT * FROM `meet` m inner join `addr` a on m.user_id = a.id where a.x between '+rtArr.x1+' and '+rtArr.x2+' and a.y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
     res.end(JSON.stringify(rows));
   });
 }
@@ -230,5 +237,6 @@ module.exports = {
     getPlaceListByDis:getPlaceListByDis,
     setXY:setXY,
     getUserListByDis:getUserListByDis,
-    getMeetListByDis:getMeetListByDis
+    getMeetListByDis:getMeetListByDis,
+    getMeetInfo:getMeetInfo
 };
