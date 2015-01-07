@@ -40,7 +40,7 @@ function getPlaceInfo(req,res){
 function getMeetInfo(req,res){
   var querys = querystring.parse(url.parse(req.url).query);
   var id = querys.id;
-  connection.query('SELECT * from meet WHERE `id`='+id, function(err, rows) {
+  connection.query('SELECT * from meet m inner join user u on m.user_id=u.id inner join addr a on m.add_id = a.id WHERE m.id='+id, function(err, rows) {
     getNewOneAddrCommentById(id,rows,res);
   });
 }
@@ -84,7 +84,7 @@ function getMeetListByDis(req,res){
   var pos = {x:querys.x,y:querys.y};
   var dis = querys.dis;
   var rtArr = forPonit(pos,dis);
-  connection.query('SELECT * FROM `meet` m inner join `addr` a on m.user_id = a.id where a.x between '+rtArr.x1+' and '+rtArr.x2+' and a.y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
+  connection.query('SELECT * FROM `meet` m inner join `addr` a on m.add_id = a.id where a.x between '+rtArr.x1+' and '+rtArr.x2+' and a.y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
     res.end(JSON.stringify(rows));
   });
 }
