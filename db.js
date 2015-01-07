@@ -72,7 +72,15 @@ function getPlaceListByDis(req,res){
     res.end(JSON.stringify(rows));
   });
 }
-
+function getMeetListByDis(req,res){
+  var querys = querystring.parse(url.parse(req.url).query);
+  var pos = {x:querys.x,y:querys.y};
+  var dis = querys.dis;
+  var rtArr = forPonit(pos,dis);
+  connection.query('SELECT m.* ,a.id,a.name FROM `meet` m inner join `addr` a on m.user_id = a.id where a.x between '+rtArr.x1+' and '+rtArr.x2+' and a.y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
+    res.end(JSON.stringify(rows));
+  });
+}
 function getUserListByDis(req,res){
   var querys = querystring.parse(url.parse(req.url).query);
   var pos = {x:querys.x,y:querys.y};
@@ -90,10 +98,10 @@ function getAddrCommentsById(req,res){
     });
 }
 function setMeet(req,res) {
-  	var querys = querystring.parse(url.parse(req.url).query);
-    var date = new Date();
-    var datetime = dateformat(date,'yyyy-MM-dd hh:mm:ss');
-  	var sql ='INSERT INTO `meet` (`user_id`, `add_id`, `time`, `people_num`, `type_demand`, `sex_demand`, `age_demand`, `skills_demand`, `site_fee`,`date_created`,`date_modified`) VALUES (2,"' +querys.add_id+'","'+querys.time+'","'+querys.people_num+'","'+querys.type_demand+'","'+querys.sex_demand+'","'+querys.age_demand+'","'+querys.skills_demand+'","'+querys.site_fee+'","'+datetime+'","'+datetime+'")';
+	var querys = querystring.parse(url.parse(req.url).query);
+  var date = new Date();
+  var datetime = dateformat(date,'yyyy-MM-dd hh:mm:ss');
+	var sql ='INSERT INTO `meet` (`user_id`, `add_id`, `time`, `people_num`, `type_demand`, `sex_demand`, `age_demand`, `skills_demand`, `site_fee`,`date_created`,`date_modified`) VALUES (2,"' +querys.add_id+'","'+querys.time+'","'+querys.people_num+'","'+querys.type_demand+'","'+querys.sex_demand+'","'+querys.age_demand+'","'+querys.skills_demand+'","'+querys.site_fee+'","'+datetime+'","'+datetime+'")';
 	connection.query(sql, function(err, rows) {
 		var code=1,message="Ok";
 		if(!err){
