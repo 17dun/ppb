@@ -44,7 +44,7 @@ function getMeetInfo(req,res){
    getMeetUsersByMeetId(id,rows,res);
   });
 }
-function getMeetUsersByMeetId(id,req,res){
+function getMeetUsersByMeetId(id,data,res){
   connection.query('SELECT mu.id,mu.user_id,mu.meet_id,mu.is_leader,DATE_FORMAT(mu.date_created,\'%Y-%m-%d %h:%m:%s\') as date_created,u.pic FROM `meet_users` mu ,`user` u where mu.user_id = u.id and mu.meet_id ='+id, function(err, rows) {
       data[0].meetUsers = rows[0];
       res.end(JSON.stringify(data[0]));
