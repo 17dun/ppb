@@ -123,6 +123,22 @@ function setMeet(req,res) {
 	  res.end('callback({code:'+code+',message:"'+message+'"})');
 	});
 }
+
+function setMeetUsers(req,res) {
+  var querys = querystring.parse(url.parse(req.url).query);
+  var date = new Date();
+  var datetime = dateformat(date,'yyyy-MM-dd hh:mm:ss');
+  var sql ='INSERT INTO `ppq`.`meet_users` (`user_id`, `meet_id`, `is_leader`, `date_created`) VALUES ("'+querys.user_id+'","'+querys.meet_id+'","'+querys.is_leader+'","'+datetime+'")';
+  connection.query(sql, function(err, rows) {
+    var code=1,message="Ok";
+    if(!err){
+      code=0;
+      message="Error";
+    }
+    res.end('callback({code:'+code+',message:"'+message+'"})');
+  });
+}
+
 function setAddrComment(req,res) {
     var querys = querystring.parse(url.parse(req.url).query);
     var sql ='INSERT INTO `ppq`.`addr_comment` (`user_id`, `addr_id`, `comment`, `time`, `start`) VALUES ("'+querys.user_id+'","'+querys.addr_id+'","'+querys.comment +'","'+querys.time +'","'+querys.start+'")';
@@ -243,5 +259,6 @@ module.exports = {
     setXY:setXY,
     getUserListByDis:getUserListByDis,
     getMeetListByDis:getMeetListByDis,
-    getMeetInfo:getMeetInfo
+    getMeetInfo:getMeetInfo,
+    setMeetUsers:setMeetUsers
 };
