@@ -89,7 +89,7 @@ function getMeetListByDis(req,res){
   var pos = {x:querys.x,y:querys.y};
   var dis = querys.dis;
   var rtArr = forPonit(pos,dis);
-  connection.query('SELECT m.id,m.user_id,m.time,m.people_num,m.add_id,m.type_demand,m.sex_demand,m.age_demand,m.skills_demand,m.site_fee,m.topic,DATE_FORMAT(m.date_created,\'%Y-%m-%d %h:%m:%s\') as date_created,DATE_FORMAT(m.date_modified,\'%Y-%m-%d %h:%m:%s\') as date_modified,a.name as add_name,a.addr,a.tel,u.name as user_name,u.sex,u.pic from meet m , user u ,addr a where m.user_id=u.id and m.add_id = a.id  and a.x between '+rtArr.x1+' and '+rtArr.x2+' and a.y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
+  connection.query('SELECT m.id,m.user_id,m.time,m.people_num,m.add_id,m.type_demand,m.sex_demand,m.age_demand,m.skills_demand,m.site_fee,m.topic,DATE_FORMAT(m.date_created,\'%Y-%m-%d %h:%m:%s\') as date_created,DATE_FORMAT(m.date_modified,\'%Y-%m-%d %h:%m:%s\') as date_modified,a.name as add_name,a.addr,a.tel,a.x,a.y,u.name as user_name,u.sex,u.pic from meet m , user u ,addr a where m.user_id=u.id and m.add_id = a.id  and a.x between '+rtArr.x1+' and '+rtArr.x2+' and a.y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
     res.end(JSON.stringify(rows));
   });
 }
