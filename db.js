@@ -84,7 +84,7 @@ function getMeetListByDis(req,res){
   var pos = {x:querys.x,y:querys.y};
   var dis = querys.dis;
   var rtArr = forPonit(pos,dis);
-  connection.query('SELECT a.name as \'add_name\',a.addr,a.tel, m.*,u.name as \'user_name\',u.sex,u.pic from meet m , user u ,addr a where m.user_id=u.id and m.add_id = a.id  and a.x between '+rtArr.x1+' and '+rtArr.x2+' and a.y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
+  connection.query('SELECT a.name as \'add_name\',a.x,a.y,a.addr,a.tel, m.*,u.name as \'user_name\',u.sex,u.pic from meet m , user u ,addr a where m.user_id=u.id and m.add_id = a.id  and a.x between '+rtArr.x1+' and '+rtArr.x2+' and a.y between '+rtArr.y1+' and '+rtArr.y2, function(err, rows) {
     res.end(JSON.stringify(rows));
   });
 }
