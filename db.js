@@ -128,7 +128,7 @@ function setMeetUsers(req,res) {
   var querys = querystring.parse(url.parse(req.url).query);
   var date = new Date();
   var datetime = dateformat(date,'yyyy-MM-dd hh:mm:ss');
-  var sql ='INSERT INTO `ppq`.`meet_users` (`user_id`, `meet_id`, `is_leader`, `date_created`) VALUES ("'+querys.user_id+'","'+querys.meet_id+'",'"0"',"'+datetime+'")';
+  var sql ='INSERT INTO `ppq`.`meet_users` (`user_id`, `meet_id`, `is_leader`, `date_created`) VALUES ("'+querys.user_id+'","'+querys.meet_id+'",0,"'+datetime+'")';
   connection.query(sql, function(err, rows) {
     var code=1,message="Ok";
     if(!err){
