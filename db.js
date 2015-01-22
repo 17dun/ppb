@@ -113,7 +113,7 @@ function setMeet(req,res) {
 	var querys = querystring.parse(url.parse(req.url).query);
   var date = new Date();
   var datetime = dateformat(date,'yyyy-MM-dd hh:mm:ss');
-	var sql =' CALL `sp_setMeet`(' +querys.add_id+',' +querys.add_id+',"'+querys.time+'","'+querys.people_num+'","'+querys.type_demand+'","'+querys.sex_demand+'","'+querys.age_demand+'","'+querys.skills_demand+'","'+querys.site_fee+'","'+datetime+'")';
+	var sql =' CALL `sp_setMeet`(' +querys.user_id+',' +querys.add_id+',"'+querys.time+'","'+querys.people_num+'","'+querys.type_demand+'","'+querys.sex_demand+'","'+querys.age_demand+'","'+querys.skills_demand+'","'+querys.site_fee+'","'+datetime+'")';
 	connection.query(sql, function(err, rows) {
 		var code=1,message="Ok";
 		if(!err){
