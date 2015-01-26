@@ -79,7 +79,7 @@ function getPlaceList(req,res){
 
 
 function getContentList(req,res){
-  connection.query('SELECT c.*,u.name,u.score,u.ballage FROM `content` c ,user u where c.user_id = u.id limit 20', function(err, rows) {
+  connection.query('SELECT c.*,u.name,u.score,u.ballage,u.pic FROM `content` c ,user u where c.user_id = u.id limit 20', function(err, rows) {
     res.end(JSON.stringify(rows));
   });
 }
