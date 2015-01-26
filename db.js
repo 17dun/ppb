@@ -75,6 +75,16 @@ function getPlaceList(req,res){
 	});
 }
 
+
+
+
+function getContentList(req,res){
+  connection.query('SELECT * from content WHERE 1=1 limit 20', function(err, rows) {
+    res.end(JSON.stringify(rows));
+  });
+}
+
+
 function getPlaceListByDis(req,res){
   var querys = querystring.parse(url.parse(req.url).query);
   var pos = {x:querys.x,y:querys.y};
@@ -260,5 +270,6 @@ module.exports = {
     getUserListByDis:getUserListByDis,
     getMeetListByDis:getMeetListByDis,
     getMeetInfo:getMeetInfo,
-    setMeetUsers:setMeetUsers
+    setMeetUsers:setMeetUsers,
+    getContentList:getContentList
 };
