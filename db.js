@@ -134,6 +134,21 @@ function setMeet(req,res) {
 	});
 }
 
+
+function delMeet(req,res) {
+  var querys = querystring.parse(url.parse(req.url).query);
+  var sql ='DELETE FROM `meet` WHERE id='+querys.meet_id;
+  connection.query(sql, function(err, rows) {
+    var code=1,message="Ok";
+    if(!err){
+      code=0;
+      message="Error";
+    }
+    res.end('callback({code:'+code+',message:"'+message+'"})');
+  });
+}
+
+
 function setMeetUsers(req,res) {
   var querys = querystring.parse(url.parse(req.url).query);
   var date = new Date();
