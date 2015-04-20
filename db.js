@@ -142,7 +142,7 @@ function delMeet(req,res) {
     var code=1,message="Ok";
     if(!err){
       code=0;
-      message="Error";
+      message="ok";
     }
     res.end('callback({code:'+code+',message:"'+message+'"})');
   });
@@ -275,6 +275,7 @@ module.exports = {
 	getUserInfo : getUserInfo,
 	getPlaceInfo : getPlaceInfo,
 	setMeet:setMeet,
+  delMeet:delMeet,
     setAddrComment:setAddrComment,
     importUserName:importUserName,
     downLoadImg:downLoadImg,
