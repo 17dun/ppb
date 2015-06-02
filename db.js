@@ -300,6 +300,7 @@ function setUserInfo(req,res){
     //     console.log(item);
     // })
 
+    var postData = ''
     req.addListener("data",function(data){  
             postData  += data;  
             console.log("Received POST data :")+data ;  
