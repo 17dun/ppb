@@ -303,10 +303,13 @@ function setUserInfo(req,res){
     req.setEncoding("utf8");  
     var postData = ''
     req.addListener("data",function(data){  
-            postData  += data;  
-            console.log("Received POST data :")+data ;  
-        });
-
+        postData  += data;  
+        console.log("Received POST data :")+data ;  
+    });
+    req.addListener("end",function(){  
+        console.log('dataend.........');
+        console.log(postData);
+    })  
 }
 
 
