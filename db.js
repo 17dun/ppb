@@ -300,7 +300,7 @@ function setUserInfo(req,res){
     //     console.log(item);
     // })
 
-    req.setEncoding("utf8");  
+    req.setEncoding("binary");  
     var postData = ''
     req.addListener("data",function(data){  
         postData  += data;  
@@ -308,7 +308,14 @@ function setUserInfo(req,res){
     });
     req.addListener("end",function(){  
         console.log('dataend.........');
-        console.log(postData);
+        fs.writeFile("./public/images/xxxxxx.jpg", postData, "binary", function(err){
+            if(err){
+                console.log("down fail");
+            }
+            console.log("down success");
+        });
+
+
     })  
 }
 
