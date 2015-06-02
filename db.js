@@ -296,11 +296,12 @@ function setUserInfo(req,res){
     // var time = querys.time;
     // // var addr = querys.addr;
     // var  sql = 'UPDATE `user` SET `style`="'+num+'" WHERE id ='+item.id;
-    querys.forEach(function(item,i){
-        console.log(item);
-    })
+    // querys.forEach(function(item,i){
+    //     console.log(item);
+    // })
 
 
+    console.log(request);
 
 }
 
