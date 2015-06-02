@@ -301,7 +301,7 @@ function setUserInfo(req,res){
     // })
 
 
-    console.log(request);
+    console.log(req);
 
 }
 
