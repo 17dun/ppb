@@ -269,13 +269,52 @@ function downLoadImg(){
         });
     });
 }
+
+
+//修改用户资料
+function setUserInfo(req,res){
+    var querys = querystring.parse(url.parse(req.url).query);
+    // var name = querys.username;
+    // var sex = querys.sex;
+    // var work = querys.work;
+    // var style = querys.style;
+    // var position = querys.position;
+    // var pic = querys.pic;
+    // var age = querys.age;
+    // var info = querys.info;
+    // var zhengshou = querys.zhengshou;
+    // var fanshou = querys.fanshou;
+    // var diban = querys.diban;
+    // var ballage = querys.ballage;
+    // var paixing = querys.paxing;
+    // var purpose = querys.purpose;
+    // var timePeriod = querys.timePeriod;
+    // var oftenAddr = querys.oftenAddr;
+    // var x = querys.x;
+    // var y = querys.y;
+    // var aim = querys.aim;
+    // var time = querys.time;
+    // // var addr = querys.addr;
+    // var  sql = 'UPDATE `user` SET `style`="'+num+'" WHERE id ='+item.id;
+    querys.forEach(function(item,i){
+        console.log(item);
+    })
+
+
+
+}
+
+
+
+
+
 module.exports = {
 	getUserList : getUserList,
 	getPlaceList : getPlaceList,
 	getUserInfo : getUserInfo,
 	getPlaceInfo : getPlaceInfo,
 	setMeet:setMeet,
-  delMeet:delMeet,
+    delMeet:delMeet,
     setAddrComment:setAddrComment,
     importUserName:importUserName,
     downLoadImg:downLoadImg,
@@ -287,5 +326,6 @@ module.exports = {
     getMeetListByDis:getMeetListByDis,
     getMeetInfo:getMeetInfo,
     setMeetUsers:setMeetUsers,
-    getContentList:getContentList
+    getContentList:getContentList,
+    setUserInfo:setUserInfo
 };
