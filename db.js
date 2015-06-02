@@ -300,6 +300,7 @@ function setUserInfo(req,res){
     //     console.log(item);
     // })
 
+    req.setEncoding("utf8");  
     var postData = ''
     req.addListener("data",function(data){  
             postData  += data;  
